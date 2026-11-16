@@ -1,0 +1,266 @@
+/* ===================================================================
+   Politeknik Bhakti Kartini — Stylesheet Utama
+   Font: Lora (display/serif) + Plus Jakarta Sans (body/sans)
+   =================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+:root {
+  --pbk-background: #f8f7f2;
+  --pbk-foreground: #0f1b2d;
+  --pbk-primary: #0e3a6e;
+  --pbk-primary-dark: #082548;
+  --pbk-secondary: #e8f0fb;
+  --pbk-accent: #f5a623;
+  --pbk-muted: #6b7280;
+  --pbk-border: rgba(14, 58, 110, 0.12);
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--pbk-background);
+  color: var(--pbk-foreground);
+}
+
+.font-display {
+  font-family: 'Lora', serif;
+}
+
+/* ---------- Skip link (aksesibilitas) ---------- */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--pbk-primary);
+  color: #fff;
+  padding: 0.75rem 1.25rem;
+  z-index: 100;
+  border-radius: 0 0 0.5rem 0;
+}
+.skip-link:focus {
+  left: 0;
+}
+
+/* ---------- Focus visible ---------- */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--pbk-accent);
+  outline-offset: 2px;
+}
+
+/* ---------- Navbar ---------- */
+.navbar-shadow {
+  box-shadow: 0 1px 0 0 var(--pbk-border);
+}
+
+.nav-link {
+  position: relative;
+  color: var(--pbk-foreground);
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: var(--pbk-accent);
+  transition: width 0.25s ease;
+}
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+.nav-link.active {
+  color: var(--pbk-primary);
+  font-weight: 600;
+}
+
+/* ---------- Hero paper-grain texture (nuansa "ijazah") ---------- */
+.paper-texture {
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(15,27,45,0.045) 1px, transparent 0);
+  background-size: 22px 22px;
+}
+
+/* ---------- Signature: ribbon badge jenjang program studi ---------- */
+.badge-ribbon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.badge-ribbon::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+/* ---------- Scroll reveal animation ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+.reveal-delay-4 { transition-delay: 0.32s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  * {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- Card hover ---------- */
+.pbk-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.pbk-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -20px rgba(14, 58, 110, 0.25);
+}
+
+/* ---------- Gallery lightbox ---------- */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 27, 45, 0.92);
+  z-index: 60;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+.lightbox-overlay.open {
+  display: flex;
+}
+.gallery-item {
+  cursor: zoom-in;
+  overflow: hidden;
+}
+.gallery-item img {
+  transition: transform 0.4s ease;
+}
+.gallery-item:hover img {
+  transform: scale(1.08);
+}
+
+/* ---------- Filter buttons ---------- */
+.filter-btn {
+  transition: all 0.2s ease;
+}
+.filter-btn.active {
+  background: var(--pbk-primary);
+  color: #fff;
+}
+
+/* ---------- Marquee (jejak alumni / mitra) ---------- */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* ---------- Blob accent shape (signature graphic) ---------- */
+.blob-accent {
+  position: absolute;
+  border-radius: 42% 58% 65% 35% / 45% 40% 60% 55%;
+  background: var(--pbk-accent);
+  opacity: 0.14;
+  filter: blur(2px);
+}
+
+/* ---------- Counter number ---------- */
+.count-up {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Form field ---------- */
+.pbk-field {
+  border: 1px solid var(--pbk-border);
+  background: #ffffff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.pbk-field:focus {
+  border-color: var(--pbk-primary);
+  box-shadow: 0 0 0 3px rgba(14, 58, 110, 0.12);
+  outline: none;
+}
+.pbk-field.field-error {
+  border-color: #d4183d;
+}
+.field-error-msg {
+  display: none;
+  color: #d4183d;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+}
+.field-error-msg.show {
+  display: block;
+}
+
+/* ---------- Back to top ---------- */
+#backToTop {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  transform: translateY(8px);
+}
+#backToTop.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* ---------- Mobile menu ---------- */
+#mobileMenu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+#mobileMenu.open {
+  max-height: 480px;
+}
+
+/* ---------- Utility: line clamp ---------- */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
